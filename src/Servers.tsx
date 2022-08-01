@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { IProps } from "./Downloading";
 import { useInput } from "./Hooks";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '@mui/material/Button';
 
 
 
@@ -21,13 +21,17 @@ export default function Servers({ client }: IProps) {
   let [serverkey, setServerKey] = useState(JSON.parse(localStorage.ARIA2_SERVERS).length - 1)
   let ul = document.querySelector('.link-wrapper')
 
+  useEffect(()=>{
+    ul?.children[serverkey].classList.add('defult-active')
+  },[])
+
   useEffect(() => {
     let emlt = document.querySelector('.defult-active')
     emlt?.classList.remove('defult-active')
     ul?.children[serverkey].classList.add('defult-active')
-  }, [serverkey])
+  }, [serverkey, ul])
 
-  console.log(serverkey,servers)
+  console.log(serverkey)
 
   function addServer() {
     let newServers = [...servers, {
@@ -70,6 +74,7 @@ export default function Servers({ client }: IProps) {
   function removeServer(server: any, key: number) {
     servers.splice(key, 1)
     setServers(servers)
+    setServerKey(key => key - 1)
 
     localStorage.ARIA2_SERVERS = JSON.stringify(servers)
     localStorage.currentServerIdx = 0
@@ -91,13 +96,8 @@ export default function Servers({ client }: IProps) {
 
   const regIp = /(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d)\.(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d)/
 
-  if (regIp.test(ip.value) && Number(port.value) <= 65535 && Number(port.value) > 0 && secret.value) {
-    let button = document.querySelector('.button-sty')
-    button?.removeAttribute('disabled')
-  } else {
-    let button = document.querySelector('.button-sty')
-    button?.setAttribute('disabled', 'true')
-  }
+  let isShow = regIp.test(ip.value) && Number(port.value) <= 65535 && Number(port.value) > 0 && secret.value
+
 
   //正则判断
   {
@@ -150,7 +150,7 @@ export default function Servers({ client }: IProps) {
           <div><span className="aria2-frist">Aria2 RPC 密钥：</span><input id="pass" type='password' value={secret.value} onChange={secret.onChange} placeholder='输入密码' /> <button><i className="fa" onClick={showPassword}>&#xf06e;</i></button></div>
         </div>
         <div className="button-post">
-          <button className="hvr-grow-shadow button-sty" onClick={saveServers}>保存设置</button>
+          <Button variant="contained" color="success" size="large" disabled={!isShow} onClick={saveServers}>保存设置</Button>
         </div>
       </div>
     </div>

@@ -28,9 +28,9 @@ function App() {
   let aria2Init = useMemo(() => {
     let server = aria2Servers[currentServerIdx]
     let aria2
-    try{
+    try {
       aria2 = new Aria2Client(server.ip, server.port, server.secret)
-    }catch(e){
+    } catch (e) {
       aria2 = new Aria2Client('192.168.0.103', 11000, 'Zwk123')
     }
     return aria2
@@ -43,10 +43,14 @@ function App() {
   let [aria2, setAria2] = useState(aria2Init)
   let [globalStat, setGlobalStat] = useState<any>({})
 
+  let [statecolor, setStateColor] = useState({ 'background': '#C7D5F1' })
+
   useEffect(() => {
     aria2.ready().then(() => {
       setAria2State(state => {
         if (state == '连接中') {
+          //@ts-ignore
+          setStateColor({ 'background': '#9ACD32' })
           return '已连接'
         } else {
           return state
@@ -56,6 +60,8 @@ function App() {
       if (aria2State == '连接中') {
         setAria2State(state => {
           if (state == '连接中') {
+            //@ts-ignore
+            setStateColor({ 'background': 'red' })
             return '未连接'
           } else {
             return state
@@ -92,11 +98,15 @@ function App() {
     localStorage.currentServerIdx = index
 
     let aria2 = new Aria2Client(server.ip, server.port, server.secret)
+    setStateColor({ 'background': '#C7D5F1' })
     setAria2State('连接中')
 
     setAria2(aria2)
   }
 
+  function changeLeft(){
+    
+  }
 
   return (
     <SelectedTasksContext.Provider value={{ selectedTasks, setSelectedTasks }}>
@@ -118,7 +128,6 @@ function App() {
                 }
               </select>
             }
-
             <div id='loading-btn'>
               <div>下载</div>
               <div className='hvr-backward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/downloading"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf01a;</i><span>下载中</span>({globalStat.numActive})</NavLink></div>
@@ -127,7 +136,7 @@ function App() {
               <div>系统设置</div>
               <div className='hvr-forward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/settings"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf013;</i><span>设置</span></NavLink></div>
               <div className='hvr-forward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/servers"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf0ae;</i><span>服务器</span></NavLink></div>
-              <div>{aria2State}</div>
+              <div style={statecolor}>{aria2State}</div>
             </div>
           </div>
           <div className="App-right">
@@ -136,6 +145,7 @@ function App() {
             </div>
             <div>
               <Routes>
+                <Route path='/' element={<Downloading client={aria2} ref={selectRef} />}></Route>
                 <Route path='/downloading' element={<Downloading client={aria2} ref={selectRef} />}></Route>
                 <Route path='/wating' element={<Waiting client={aria2} ref={selectRef} />}></Route>
                 <Route path='/completed' element={<Completed client={aria2} ref={selectRef} />}></Route>
@@ -145,12 +155,15 @@ function App() {
                 <Route path='/task/detail/:gid' element={<TaskDetail client={aria2} />}></Route>
               </Routes>
             </div>
+            <div className='App-down'>
+              <div className='nav-left' onClick={changeLeft}><i className='fa'>&#xf039;</i></div>
+              <div className='show-speed'>
+                <span>上传速度：{(globalStat.uploadSpeed / 1024).toFixed(1)}KB/s <i className='fa up-icon'>&#xf062;</i></span>
+                <span>下载速度：{(globalStat.downloadSpeed / 1024).toFixed(1)}KB/s <i className='fa down-icon'>&#xf063;</i></span>
+              </div>
+            </div>
           </div>
           <div>
-          </div>
-          <div className='App-down'>
-            <span>上传速度：{(globalStat.uploadSpeed / 1024).toFixed(1)}KB/s <i className='fa up-icon'>&#xf062;</i></span>
-            <span>下载速度：{(globalStat.downloadSpeed / 1024).toFixed(1)}KB/s <i className='fa down-icon'>&#xf063;</i></span>
           </div>
         </div>
       </HashRouter>

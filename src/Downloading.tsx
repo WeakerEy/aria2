@@ -20,11 +20,11 @@ function Downloading({ client }: IProps, ref: any) {
   }, 1000)
 
 
-  let {selectedGids,selectTask,tasksContext} = useSelect(tasks, ref)
+  let { selectedGids, selectTask, tasksContext } = useSelect(tasks, ref)
 
-  useEffect(()=>{
+  useEffect(() => {
     tasksContext.setSelectedTasks([])
-  },[])
+  }, [])
 
   return (
     <div>
@@ -40,12 +40,14 @@ function Downloading({ client }: IProps, ref: any) {
           tasks.map(task => {
             return (
               <li key={task.gid} className="taskDown-info">
-                <input type="checkbox" checked={selectedGids.includes(task.gid)} onChange={(e) => { selectTask(e, task.gid) }} />
-                <span>{task.files[0].path.split('/').pop()}</span>
-                <span>{(task.totalLength/1024/1024).toFixed(2)} Mb</span>
-                <span>{(task.downloadSpeed/1024).toFixed(2)} kb/s</span>
-                <span>{(task.completedLength/task.totalLength*100).toFixed(2) +'%'}</span>
-                <Link to={'/task/detail/' + task.gid}>详情</Link>
+                <label htmlFor={task.gid}>
+                  <input type="checkbox" id={task.gid} checked={selectedGids.includes(task.gid)} onChange={(e) => { selectTask(e, task.gid) }} />
+                  <span>{task.files[0].path.split('/').pop()}</span>
+                  <span>{(task.totalLength / 1024 / 1024).toFixed(2)} Mb</span>
+                  <span>{(task.downloadSpeed / 1024).toFixed(2)} kb/s</span>
+                  <span>{(task.completedLength / task.totalLength * 100).toFixed(2) + '%'}</span>
+                  <Link to={'/task/detail/' + task.gid}>详情</Link>
+                </label>
               </li>
             )
           })

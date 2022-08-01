@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Aria2Client from "./aria2.client"
 import { useInput } from "./Hooks"
+import Button from '@mui/material/Button';
 
 
 interface Iprops {
@@ -91,14 +92,18 @@ export default function NewTask({ client }: Iprops) {
             <div>
               <textarea cols={100} rows={15} value={downloadUrls.value} onChange={downloadUrls.onChange} placeholder='支持多个下载链接，每个链接占据一行：'></textarea>
             </div>
-            <button className="hvr-grow-shadow button-sty downbtn" onClick={start}>立即下载</button>
+            <div className="downbtn">
+              <Button variant="contained" color="success" size="large" onClick={start}>立即下载</Button>
+            </div>
           </div>
           :
           <div id="aria2-wrapper">
             <div><span className="aria2-frist"> 下载存储路径 <i onMouseEnter={(e) => mouseHover(e)} onMouseLeave={mouseLeave} className="fa" style={{ 'color': '#3C8DBC' }} data-content='以软件安装路径为默认下载路径，可自定义路径' >&#xf059;</i> </span><input type="text" value={dir.value} onChange={dir.onChange} /></div>
             <div><span className="aria2-frist"> 最大下载速度 <i onMouseEnter={(e) => mouseHover(e)} onMouseLeave={mouseLeave} className="fa" style={{ 'color': '#3C8DBC' }} data-content='设置每个任务的最大下载速度 (字节/秒). 0 表示不限制. 您可以增加数值的单位 K 或 M (1K = 1024, 1M = 1024K)' >&#xf059;</i> </span> <input type="text" value={downloadSpeed.value} onChange={downloadSpeed.onChange}></input></div>
             <div><span className="aria2-frist"> 同时下载件数 </span> <input type="text" value={maxPiece.value} onChange={maxPiece.onChange}></input></div>
-            <button className="hvr-grow-shadow button-sty downbtn2" onClick={start}>立即下载</button>
+            <span className="downbtn2">
+              <Button variant="contained" color="success" size="large" onClick={start}>立即下载</Button>
+            </span>
           </div>
       }
       <div hidden id="nav"></div>

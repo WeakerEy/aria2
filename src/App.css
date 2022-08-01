@@ -7,6 +7,7 @@
 
 .App {
   display: flex;
+  width: 100vw;
   height: 100vh;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -14,10 +15,15 @@
 
 .App-left {
   background-color: #F4F5F7;
-  width: 25vh;
+  width: 10%;
   height: 100%;
   border-right: 1px solid;
   text-align: center;
+}
+
+
+#state-color div{
+  font-size: 8px;
 }
 
 .showtitle {
@@ -49,14 +55,14 @@
 .App-left #loading-btn div:nth-child(1) {
   color: #707070;
   font-size: 15px;
-  left: -80px;
+  left: -70px;
   top: 15px;
 }
 
 .App-left #loading-btn div:nth-child(5) {
   color: #707070;
   font-size: 15px;
-  left: -63px;
+  left: -53px;
   top: 15px;
 }
 
@@ -89,7 +95,7 @@
 }
 
 .down-wrapper>span {
-  width: 300px;
+  width: 305px;
 }
 
 .wait-wrapper {
@@ -101,7 +107,7 @@
 }
 
 .wait-wrapper>span {
-  width: 375px;
+  width: 400px;
 }
 
 .wait-wrapper span:first-child {
@@ -109,7 +115,7 @@
 }
 
 
-.taskCom-info {
+.taskCom-info label {
   display: flex;
   height: 60px;
   width: 100%;
@@ -125,7 +131,7 @@
   width: 30%;
 }
 
-.taskDown-info {
+.taskDown-info label{
   display: flex;
   height: 60px;
   width: 100%;
@@ -138,7 +144,7 @@
 }
 
 .taskDown-info span {
-  width: 305px;
+  width: 315px;
 }
 
 .info-wrapper>li:nth-child(2n+1) {
@@ -149,11 +155,8 @@
   background-color: #6d6d6d48;
 }
 
-
-
 .App-right {
   flex-grow: 1;
-  width: 80vh;
 }
 
 
@@ -327,20 +330,39 @@ i {
 }
 
 
+#border-btn button{
+  margin-top: 3px;
+  margin-left: 4px;
+}
+
 #border-btn i {
   padding-right: 3px;
 }
 
 
 .App-down {
-  position: absolute;
-  right: 0;
+  height: 50px;
+  width: 100%;
+  position: fixed;
   bottom: 0;
+  border-top: 1px solid;
 }
 
-.App-down span {
-  margin-right: 10px;
+.show-speed {
+  position: fixed;
+  bottom: 15px;
+  right: 30px;
 }
+
+.nav-left {
+  padding-top: 15px;
+  padding-left: 10px;
+}
+
+.nav-left:hover i{
+  color: #2098D1;
+}
+
 
 
 .newTask {
@@ -362,14 +384,13 @@ i {
 
 .downbtn {
   font-family: 'Times New Roman', Times, serif;
-  background-color: #9ACD32;
   margin-top: 30px;
-  margin-left: 450px;
+  margin-left: 30%;
 }
 
 .downbtn2 {
+  display: inline-block;
   font-family: 'Times New Roman', Times, serif;
-  background-color: #9ACD32;
   margin: 30px 45%;
 }
 

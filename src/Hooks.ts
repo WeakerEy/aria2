@@ -10,7 +10,7 @@ export function useInput(init = "") {
   return {
     value,
     onChange: useCallback(onChange, []),
-    setvalue: useCallback(setValue,[])
+    setvalue: useCallback(setValue, [])
   }
 }
 
@@ -120,6 +120,9 @@ export function useSelect(tasks: any[], ref: any) {
           tasksContext.setSelectedTasks(tasks)
           setSelectedGids(tasks.map(task => task.gid))
         }
+      },
+      removeGids: function () {
+        setSelectedGids([])
       }
     }
   }, [tasks])
@@ -141,6 +144,7 @@ export function useSelect(tasks: any[], ref: any) {
   return {
     selectedGids,
     selectTask: selectTask,
-    tasksContext
+    tasksContext,
+    setSelectedGids
   }
 }
