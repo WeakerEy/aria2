@@ -20,18 +20,12 @@ export default function Servers({ client }: IProps) {
   let [servers, setServers] = useState(aria2Servers)
   let [serverkey, setServerKey] = useState(JSON.parse(localStorage.ARIA2_SERVERS).length - 1)
   let ul = document.querySelector('.link-wrapper')
-
-  useEffect(()=>{
-    ul?.children[serverkey].classList.add('defult-active')
-  },[])
-
-  useEffect(() => {
-    let emlt = document.querySelector('.defult-active')
-    emlt?.classList.remove('defult-active')
-    ul?.children[serverkey].classList.add('defult-active')
-  }, [serverkey, ul])
+  let emlt = document.querySelector('.defult-active')
+  emlt?.classList.remove('defult-active')
+  ul?.children[serverkey].classList.add('defult-active')
 
   console.log(serverkey)
+
 
   function addServer() {
     let newServers = [...servers, {
@@ -74,7 +68,9 @@ export default function Servers({ client }: IProps) {
   function removeServer(server: any, key: number) {
     servers.splice(key, 1)
     setServers(servers)
-    setServerKey(key => key - 1)
+    if (serverkey == key) {
+      setServerKey(key => key - 1)
+    }
 
     localStorage.ARIA2_SERVERS = JSON.stringify(servers)
     localStorage.currentServerIdx = 0
@@ -85,7 +81,6 @@ export default function Servers({ client }: IProps) {
 
   function showPassword() {
     let input = document.getElementById('pass')
-    console.log(input)
     if (input?.getAttribute('type') != 'text') {
       input?.setAttribute('type', 'text')
     } else {
@@ -103,7 +98,6 @@ export default function Servers({ client }: IProps) {
   {
     if (ip.value && !regIp.test(ip.value)) {
       let ip = document.getElementById('isIp')
-      console.log(ip)
       ip?.classList.add('error-input')
     }
 
