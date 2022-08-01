@@ -67,8 +67,6 @@ export default function Header({ client, select }: IProps) {
     toast('删除成功')
   }
 
-  console.log(tasksContext.selectedTasks.length)
-
 
   let url: any = window.location.href.split('/').pop()
   let urls = [

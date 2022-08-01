@@ -19,6 +19,23 @@
   height: 100%;
   border-right: 1px solid;
   text-align: center;
+  transition: all 0.5s ease;
+}
+
+.App-left.close {
+  width: 5%;
+}
+
+.App-left.close .showtitle{
+  font-size: 25px;
+}
+
+.App-left.close #loading-btn span,
+.App-left.close #selectServers,
+.App-left.close #loading-btn div:nth-child(1),
+.App-left.close #loading-btn div:nth-child(5)
+{
+  display: none;
 }
 
 
@@ -36,21 +53,19 @@
 .App-left #loading-btn {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: space-between;
   height: 40%;
 }
 
 
 .App-left #loading-btn div {
-  border: 0;
-  border-radius: 0;
-  font-weight: 175;
-  font-size: 20px;
-  padding: 10px 0px;
   position: relative;
   width: 100%;
+  font-size: 20px;
+  padding: 10px 0px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 
 .App-left #loading-btn div:nth-child(1) {
   color: #707070;
@@ -66,9 +81,6 @@
   top: 15px;
 }
 
-.App-left #loading-btn div:nth-child(6) {
-  right: 13px;
-}
 
 .App-left #loading-btn div i {
   padding-right: 5px;
@@ -354,6 +366,10 @@ i {
   right: 30px;
 }
 
+.show-speed span{
+  margin-right: 20px;
+}
+
 .nav-left {
   padding-top: 15px;
   padding-left: 10px;
@@ -434,6 +450,7 @@ i {
   transform: translateY(0);
 }
 
+
 /* Grow Shadow */
 .hvr-grow-shadow {
   display: inline-block;
@@ -496,6 +513,10 @@ i {
 .hvr-backward:active {
   -webkit-transform: translateX(-8px);
   transform: translateX(-8px);
+}
+
+.hvr-backward:hover span{
+  color: #2B6BDC;
 }
 
 

@@ -104,8 +104,9 @@ function App() {
     setAria2(aria2)
   }
 
-  function changeLeft(){
-    
+  function changeLeft() {
+    let left = document.querySelector('.App-left')
+    left?.classList.toggle('close')
   }
 
   return (
@@ -115,24 +116,26 @@ function App() {
         <div className="App">
           <div className='App-left'>
             <div className='showtitle'>AriaNg</div>
-            {
-              <select onChange={changeServer} value={currentServerIdx}>
-                {
-                  aria2Servers.map((server: any, index: number) => {
-                    return (
-                      <option key={server.name + index} value={index} >
-                        {server.ip + ':' + server.port}
-                      </option>
-                    )
-                  })
-                }
-              </select>
-            }
+            <div id='selectServers'>
+              {
+                <select onChange={changeServer} value={currentServerIdx}>
+                  {
+                    aria2Servers.map((server: any, index: number) => {
+                      return (
+                        <option key={server.name + index} value={index} >
+                          {server.ip + ':' + server.port}
+                        </option>
+                      )
+                    })
+                  }
+                </select>
+              }
+            </div>
             <div id='loading-btn'>
               <div>下载</div>
-              <div className='hvr-backward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/downloading"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf01a;</i><span>下载中</span>({globalStat.numActive})</NavLink></div>
-              <div className='hvr-backward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/wating"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf017;</i><span>等待中</span>({globalStat.numWaiting})</NavLink></div>
-              <div className='hvr-backward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/completed"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf00c;</i><span>已完成</span>({globalStat.numStopped})</NavLink></div>
+              <div className='hvr-backward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/downloading"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf01a;</i><span>下载中({globalStat.numActive})</span></NavLink></div>
+              <div className='hvr-backward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/wating"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf017;</i><span>等待中({globalStat.numWaiting})</span></NavLink></div>
+              <div className='hvr-backward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/completed"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf00c;</i><span>已完成({globalStat.numStopped})</span></NavLink></div>
               <div>系统设置</div>
               <div className='hvr-forward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/settings"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf013;</i><span>设置</span></NavLink></div>
               <div className='hvr-forward'><NavLink style={({ isActive }) => ({ color: isActive ? '#2B6BDC' : '#1A1A1A' })} to="/servers"><i style={{ color: '#1A1A1A' }} className='fa'>&#xf0ae;</i><span>服务器</span></NavLink></div>

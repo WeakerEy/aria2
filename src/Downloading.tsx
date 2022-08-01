@@ -1,7 +1,7 @@
 import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from "react"
 import { Link } from "react-router-dom"
 import Aria2Client from "./aria2.client"
-import { SelectedTasksContext, useSelect, useTasks } from "./Hooks"
+import { useSelect, useTasks } from "./Hooks"
 
 
 
@@ -25,6 +25,7 @@ function Downloading({ client }: IProps, ref: any) {
   useEffect(() => {
     tasksContext.setSelectedTasks([])
   }, [])
+
 
   return (
     <div>

@@ -61,7 +61,6 @@ export default function NewTask({ client }: Iprops) {
     nav!.style.top = y + 'px'
     nav!.innerText = elm.dataset.content
     nav!.removeAttribute('hidden')
-    console.log()
   }
 
   function mouseLeave() {
