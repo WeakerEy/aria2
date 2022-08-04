@@ -31,7 +31,7 @@ export default function Servers({ client }: IProps) {
     let emlt = document.querySelector('.defult-active')
     emlt?.classList.remove('defult-active')
     ul?.children[serverkey].classList.add('defult-active')
-  }, [ul, serverkey])
+  }, [ul, serverkey, servers])
 
 
   function addServer() {
@@ -73,10 +73,16 @@ export default function Servers({ client }: IProps) {
   }
 
   function removeServer(server: any, key: number) {
-    servers.splice(key, 1)
-    setServers(servers)
+    let numKey = key
+    let newServers = servers.filter((server:any,key:number)=>{
+      return key != numKey
+    })
+    setServers(newServers)
+
     if (serverkey == key) {
       setServerKey(key => key - 1)
+    } else {
+      setServerKey(serverkey)
     }
 
     localStorage.ARIA2_SERVERS = JSON.stringify(servers)
