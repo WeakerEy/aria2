@@ -20,11 +20,18 @@ export default function Servers({ client }: IProps) {
   let [servers, setServers] = useState(aria2Servers)
   let [serverkey, setServerKey] = useState(JSON.parse(localStorage.ARIA2_SERVERS).length - 1)
   let ul = document.querySelector('.link-wrapper')
-  let emlt = document.querySelector('.defult-active')
-  emlt?.classList.remove('defult-active')
-  ul?.children[serverkey].classList.add('defult-active')
 
-  console.log(serverkey)
+  useEffect(() => {
+    let emlt = document.querySelector('.defult-active')
+    emlt?.classList.remove('defult-active')
+    ul?.children[serverkey].classList.add('defult-active')
+  }, [])
+
+  useEffect(() => {
+    let emlt = document.querySelector('.defult-active')
+    emlt?.classList.remove('defult-active')
+    ul?.children[serverkey].classList.add('defult-active')
+  }, [ul, serverkey])
 
 
   function addServer() {

@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter, NavLink, Routes, Route } from 'react-router-dom'
+import { HashRouter, NavLink, Routes, Route, Navigate } from 'react-router-dom'
 import Downloading from './Downloading';
 import Waiting from './Waiting';
 import Completed from './Completed';
@@ -148,7 +148,7 @@ function App() {
             </div>
             <div>
               <Routes>
-                <Route path='/' element={<Downloading client={aria2} ref={selectRef} />}></Route>
+                <Route path='/' element={<Navigate replace to = 'downloading' />}></Route>
                 <Route path='/downloading' element={<Downloading client={aria2} ref={selectRef} />}></Route>
                 <Route path='/wating' element={<Waiting client={aria2} ref={selectRef} />}></Route>
                 <Route path='/completed' element={<Completed client={aria2} ref={selectRef} />}></Route>
