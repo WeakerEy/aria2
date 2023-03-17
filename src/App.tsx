@@ -19,7 +19,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 globalThis.Aria2Client = Aria2Client
 
 function App() {
-  let [aria2State, setAria2State] = useState('连接中')
+  let [aria2State, setAria2State] =  useState('连接中')
 
   var aria2Servers: any = useMemo(() => JSON.parse(localStorage.ARIA2_SERVERS ?? '[]'), [])
 
